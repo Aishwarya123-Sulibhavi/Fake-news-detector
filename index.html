@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fake News Detector</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Fake News Detector</h1>
+        <form method="POST" enctype="multipart/form-data">
+            <textarea name="news_text" placeholder="Enter news article here..." rows="4"></textarea>
+            <input type="file" name="file" accept=".txt">
+            <button type="submit">Check News</button>
+        </form>
+
+        {% if fake_news or real_news %}
+        <div class="results">
+            {% if fake_news %}
+            <div class="news-section fake">
+                <h2>Fake News</h2>
+                <ul>
+                    {% for news in fake_news %}
+                        <li>{{ news }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+
+            {% if real_news %}
+            <div class="news-section real">
+                <h2>Real News</h2>
+                <ul>
+                    {% for news in real_news %}
+                        <li>{{ news }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
